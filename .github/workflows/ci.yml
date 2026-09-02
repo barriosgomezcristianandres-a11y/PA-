@@ -1,0 +1,51 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build, Test & JaCoCo Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Compilar y ejecutar pruebas con Maven
+        run: mvn clean test
+        env:
+          JWT_SECRET: isivi_local_development_jwt_secret_key_must_be_long_enough_256_bits_for_local_env
+          ADMIN_INITIAL_PASSWORD: admin_ci_dummy_pass
+          APP_ENV_DEMO: ${{ secrets.APP_ENV_DEMO }}
+
+      - name: Verificar enmascaramiento de secreto GitHub (APP_ENV_DEMO)
+        run: |
+          echo "Comprobando la presencia del secreto..."
+          if [ -n "$APP_ENV_DEMO" ]; then
+            echo "El secreto APP_ENV_DEMO esta configurado correctamente: $APP_ENV_DEMO"
+          else
+            echo "El secreto APP_ENV_DEMO no esta definido (opcional)"
+          fi
+        env:
+          APP_ENV_DEMO: ${{ secrets.APP_ENV_DEMO }}
+
+      - name: Publicar reporte de cobertura JaCoCo como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-coverage-report
+          path: target/site/jacoco/
+          if-no-files-found: ignore
