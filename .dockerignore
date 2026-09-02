@@ -1,0 +1,15 @@
+# Build artifacts
+target/
+
+# Local configuration and credentials
+application-local.properties
+.env
+.env.*
+!.env.example
+
+# IDE, VCS, and logs
+.idea/
+*.iml
+.vscode/
+.git/
+*.log

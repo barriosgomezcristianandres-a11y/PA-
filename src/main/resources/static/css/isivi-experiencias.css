@@ -1,0 +1,24 @@
+/* Estilos encapsulados exclusivamente para el módulo Experiencias ISIVI */
+.isivi-experiencias-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.isivi-experiencias-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.isivi-experiencias-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+}
+
+.isivi-experiencias-star {
+    color: #d4af37;
+}
+
+.isivi-experiencias-badge {
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #d4af37;
+}

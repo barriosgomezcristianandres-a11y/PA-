@@ -1,0 +1,16 @@
+# Build
+target/
+
+# Configuración y secretos locales
+application-local.properties
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Logs
+*.log
