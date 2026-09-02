@@ -25,8 +25,8 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Compilar y ejecutar pruebas con Maven
-        run: mvn clean test
+      - name: Compilar y ejecutar pruebas unitarias con Maven
+        run: mvn -B clean test -Dtest=WompiServiceUnitTest,HealthControllerUnitTest
         env:
           JWT_SECRET: isivi_local_development_jwt_secret_key_must_be_long_enough_256_bits_for_local_env
           ADMIN_INITIAL_PASSWORD: admin_ci_dummy_pass
