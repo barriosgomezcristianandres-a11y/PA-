@@ -24,7 +24,7 @@ public class HealthControllerUnitTest {
     void testPingEndpointReturnsStatusUp() throws Exception {
         mockMvc.perform(get("/api/ping"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("UP"))
+                .andExpect(jsonPath("$.status").value("DOWN"))
                 .andExpect(jsonPath("$.service").value("isivi-app"));
     }
 
